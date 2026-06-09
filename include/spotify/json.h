@@ -1,0 +1,4 @@
+#ifndef SPOTIFY_JSON_H
+#define SPOTIFY_JSON_H
+
+#endif // SPOTIFY_JSON_H
