@@ -75,3 +75,26 @@ void spotify_fetch_access_token_and_refresh_token(spotify_login *login, char *en
     spotify_header_free(header);
     spotify_http_free(&http);
 }
+
+// method used not to GET the refresh token, but to REFRESH the access token, using the refresh token
+void spotify_refresh_access_token(spotify_login *login, char *encoded_id, char *refresh_token)
+{
+  spotify_header *header = spotify_new_header();
+  spotify_header_add(header, "Content-Type", "%s", "application/x-www-form-urlencoded");
+  spotify_header_add(header, "Authorization", "Basic %s", encoded_id);
+
+  spotify_body *body = spotify_new_body();
+  spotify_body_add(body, "grant_type", "%s", "refresh_token");
+  spotify_body_add(body, "refresh_token", "%s", refresh_token);
+
+  spotify_http http = spotify_send_http("https://accounts.spotify.com/api/token", "POST", body, header);
+
+  cJSON *root = cJSON_Parse(http.response);
+  cJSON *access_token = cJSON_GetObjectItem(root, "access_token");
+
+  login->access_token = (char *)malloc(strlen(access_token->valuestring) +1);
+  strcpy(login->access_token, access_token->valuestring);
+  spotify_header_free(header);
+  spotify_body_free(body);
+  spotify_http_free(&http);
+}

@@ -6,13 +6,10 @@
 // TODO make sure all them are freed properly and when needed
 typedef struct
 {
-    char *client_id;
-    char *client_secret;
     char *access_token;
     char *refresh_token;
     char *authorization_token;
     char *encoded_id;
-
 } spotify_login;
 
 spotify_track *spotify_get_current_track(char *authorization_code);

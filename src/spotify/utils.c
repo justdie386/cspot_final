@@ -130,7 +130,6 @@ spotify_http spotify_send_http(char *url, char *request_type, spotify_body *body
   {
     curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, body->body);
     curl_easy_setopt(hnd, CURLOPT_POSTFIELDSIZE_LARGE, (curl_off_t)strlen(body->body));
-
   } else 
   {
     curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "");
@@ -148,8 +147,7 @@ spotify_http spotify_send_http(char *url, char *request_type, spotify_body *body
   ret = curl_easy_perform(hnd);
   curl_easy_cleanup(hnd);
   hnd = NULL;
-  // im leaving it to spotify_http_free to free the result of the http request,
-  // which isn't what i used to do before
+  //not sure why its {0}, but it works rather just fine
   spotify_http res = {0};
   res.response = response;
 
