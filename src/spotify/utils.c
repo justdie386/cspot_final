@@ -132,7 +132,7 @@ spotify_http spotify_send_http(char *url, char *request_type, spotify_body *body
     curl_easy_setopt(hnd, CURLOPT_POSTFIELDSIZE_LARGE, (curl_off_t)strlen(body->body));
   } else 
   {
-    curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, "");
+    curl_easy_setopt(hnd, CURLOPT_POSTFIELDS, request_type);
     curl_easy_setopt(hnd, CURLOPT_POSTFIELDSIZE_LARGE, 0L);
   }
   curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, header->curl_header);
