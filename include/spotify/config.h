@@ -6,9 +6,10 @@
 // i dont want to have to add config.json to the config path using malloc
 // so i just made two #define, if there's a better solution, let me know
 #ifdef _WIN32
-#define CSPOTIFY_CONFIG_PATH "something something appdata"
-#define CSPOTIFY_CONFIG_FILE "Something something appdata"
-#define mkdir(dir, mode), _mkdir(dir)
+#define CSPOTIFY_CONFIG_PATH getenv("APPDATA") + "cspotify"
+#define CSPOTIFY_CONFIG_FILE CSPOTIFY_CONFIG_PATH + "cspotify/config.json"
+#include <direct.h>
+#define mkdir(dir, mode) _mkdir(dir)
 #else
 #define CSPOTIFY_CONFIG_PATH getenv("HOME") + ".config/cspotify"
 #define CSPOTIFY_CONFIG_FILE "~/.config/cspotify/config.json"

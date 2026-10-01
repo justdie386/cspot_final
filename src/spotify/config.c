@@ -40,7 +40,7 @@ void spotify_config_create(const char *folder, const char *filename, const char 
   if (path_exist(folder) == 1)
   {
     printf("[+] Creating folder path: %s\n", folder);
-    mkdir(folder, 0755);
+    mkdir(folder, 0775);
   }
 
   cJSON *config = cJSON_CreateObject();

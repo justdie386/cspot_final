@@ -6,8 +6,10 @@
 #include <spotify/config.h>
 #include <time.h>
 
-#define CLIENT_ID "1d76c1f4d5e04cb689e6bc7d8427fe97"
-#define CLIENT_SECRET "cf29197bd5114488ab24c4c3500d71bd"
+// These IDs do not work anymore, it still runs on my machine since it created a config file
+// when it still worked and it does not really require me to keep the IDs below valid
+#define CLIENT_ID "1d72fccf324049a78f1b06135c419470"
+#define CLIENT_SECRET "231828d161e14f6aaf98e12c21578a5d"
 
 int main()
 {
@@ -28,8 +30,7 @@ int main()
         spotify_encode(&login, CLIENT_ID, CLIENT_SECRET);
         printf("[+] Encoded id: %s\n", login.encoded_id);
         printf("[+] Generating authorization url callback\n");
-
-        // the spotify web api requires us to have a random number between 100000 and 999999 at the end of the url we are making the user open
+        // The spotify web api requires us to have a random number between 100000 and 999999 at the end of the url we are making the user open
         srand(time(NULL));
         int code = 100000 + rand() % 900000;
         

@@ -42,6 +42,8 @@ void spotify_track_construct(spotify_track *track, char *response) {
   }
   cJSON_Delete(root);
 }
+
+// Not really sure if i am freeing everything properly, should've just used C++, damn
 void spotify_track_free(spotify_track *track) {
   free(track->track_name);
   free(track->artist_name);
