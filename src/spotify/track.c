@@ -2,6 +2,7 @@
 #include <spotify/track.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 spotify_track *spotify_new_track() {
   spotify_track *track = malloc(sizeof(*track));
@@ -27,8 +28,21 @@ void spotify_track_construct(spotify_track *track, char *response) {
   {
     track->track_name = NULL;
   }
+
+  
+  cJSON *artists = cJSON_GetObjectItem(item, "artists");
+  cJSON *artist_object = cJSON_GetArrayItem(artists, 0);
+  cJSON *artist_name = cJSON_GetObjectItem(artist_object, "name");
+
+
+  if (cJSON_IsString(artist_name))
+  {
+    track->artist_name = (char *)malloc(strlen(artist_name->valuestring) + 1);
+    strcpy(track->artist_name, artist_name->valuestring);
+  }
   cJSON_Delete(root);
 }
 void spotify_track_free(spotify_track *track) {
-  // decide what needs to be freed
+  free(track->track_name);
+  free(track->artist_name);
 }

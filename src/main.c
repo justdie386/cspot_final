@@ -11,6 +11,7 @@
 
 int main()
 {
+    printf("[*] Spotify tool to get current song showcase!\n");
     spotify_login login;
 
     char *folder_path = spotify_new_config_path("%s%s", getenv("HOME"), "/.config/cspotify");
@@ -52,7 +53,8 @@ int main()
     if (current_song->is_playing == 1)
     {
         printf("[+] Current song playing: %s\n", current_song->track_name);
-     } else 
+	printf("[+] Current song artist playing: %s\n", current_song->artist_name);
+    } else 
      {
          printf("[+] No song currently playing/issue talking with spotify?\n");
      }
@@ -60,4 +62,5 @@ int main()
     free(folder_path);
     free(file_path);
     spotify_login_free(&login);
+    printf("[*] Cleaned up, thanks!\n");
 }
